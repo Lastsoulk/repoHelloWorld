@@ -10,8 +10,21 @@ pipeline {
         }
 
         stage('workspace') {
+          agent any
           steps {
             bat 'cd'
+          }
+        }
+
+        stage('angular') {
+          agent {
+            node {
+              label 'Angular'
+            }
+
+          }
+          steps {
+            build(job: 'angularRep', wait: true)
           }
         }
 
